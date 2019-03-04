@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container pt-4">
+        <h3>Редактировать изображение</h3>
+        <form>
+            {{ form.non_field_errors }}
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="width">Ширина:</label>
+                    <input type="number" min="1" max="4000" name="width" class="form-control" id="width" placeholder="Ширина" value="{{ request.GET.width }}">
+                    {% if form.errors.width %}
+                        <small class="form-text text-muted">{{ form.errors.width }}</small>
+                    {% endif %}
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="height">Высота:</label>
+                    <input type="number" min="1" max="4000" name="height" class="form-control" id="height" placeholder="Высота" value="{{ request.GET.height }}"">
+                    {% if form.errors.height %}
+                        <small class="form-text text-muted">{{ form.errors.height }}</small>
+                    {% endif %}
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="size">Размер выходного файла(Kb):</label>
+                    <input type="number" step="any" name="size" class="form-control" id="size" value="{{ request.GET.size }}">
+                    {% if form.errors.size %}
+                        <small class="form-text text-muted">{{ form.errors.size }}</small>
+                    {% endif %}
+                </div>
+            </div>
+            <input type="submit" class="btn btn-primary">
+        </form>
+        <img src="{{ image_src }}">
+    </div>
+{% endblock %}

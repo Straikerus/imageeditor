@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container pt-4">
+        <h3>Выберите способ загрузки изображения</h3>
+        <form method="POST" enctype="multipart/form-data"> {% csrf_token %}
+            {{ form.non_field_errors }}
+            <div class="form-group">
+                    <label for="fileInput">Файл изображения:</label>
+                    <input type="file" name="file" class="form-control-file" id="fileInput">
+                    {% if form.errors.file %}
+                        <small class="form-text text-muted">{{ form.errors.file }}</small>
+                    {% endif %}
+            </div>
+            <div class="form-group">
+                <label for="urlInput">Ссылка на изображение:</label>
+                <input type="url" name="url" class="form-control" id="urlInput" placeholder="Ссылка">
+                {% if form.errors.url %}
+                    <small class="form-text text-muted">{{ form.errors.url }}</small>
+                {% endif %}
+            </div>
+            <input type="submit" class="btn btn-primary">
+        </form>
+    </div>
+{% endblock %}
